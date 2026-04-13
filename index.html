@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FluffCo Down Feather — Creative Concepts | Skyvane</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #111111;
+    --mid: #444444;
+    --muted: #777777;
+    --light: #bbbbbb;
+    --rule: #e5e5e5;
+    --bg: #ffffff;
+    --bg-soft: #f8f8f8;
+    --bg-section: #f2f2f2;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--black);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .site-header {
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+  }
+  .logo { font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+  .header-meta { font-size: 12px; color: var(--muted); }
+
+  .cover { padding: 80px 48px 72px; border-bottom: 1px solid var(--rule); }
+  .cover-label { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+  .cover h1 { font-size: clamp(36px, 5vw, 60px); font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; color: var(--black); max-width: 700px; margin-bottom: 20px; }
+  .cover-desc { font-size: 16px; color: var(--mid); max-width: 520px; line-height: 1.65; }
+  .cover-meta { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+  .cover-meta-item { padding: 16px 24px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 4px; }
+  .cover-meta-item .label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .cover-meta-item .value { font-size: 13px; font-weight: 600; color: var(--black); }
+
+  .toc { padding: 56px 48px; border-bottom: 1px solid var(--rule); background: var(--bg-soft); }
+  .toc-label { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .toc-col-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding-bottom: 12px; border-bottom: 1px solid var(--rule); margin-bottom: 4px; }
+  .toc-item { display: flex; align-items: baseline; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: inherit; }
+  .toc-item:last-child { border-bottom: none; }
+  .toc-num { font-size: 11px; font-weight: 700; color: var(--light); min-width: 20px; }
+  .toc-title { font-size: 13px; font-weight: 500; color: var(--black); line-height: 1.45; flex: 1; }
+  .toc-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; background: var(--black); color: white; padding: 2px 7px; border-radius: 2px; white-space: nowrap; }
+  .toc-tag.listicle { background: #555; }
+
+  .section-divider { padding: 24px 48px; background: var(--black); display: flex; align-items: center; justify-content: space-between; }
+  .section-divider h3 { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: white; }
+  .section-divider span { font-size: 11px; color: rgba(255,255,255,0.4); }
+
+  .article { padding: 80px 48px; border-bottom: 1px solid var(--rule); }
+  .article:nth-child(even) { background: var(--bg-soft); }
+
+  .article-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+  .article-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: var(--light); }
+  .format-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--black); color: white; padding: 2px 8px; border-radius: 2px; }
+  .format-tag.listicle { background: #555; }
+  .angle-tag { font-size: 11px; color: var(--muted); font-style: italic; }
+
+  .article h2 { font-size: clamp(22px, 3vw, 36px); font-weight: 800; line-height: 1.18; letter-spacing: -0.022em; color: var(--black); max-width: 720px; margin-bottom: 48px; }
+
+  .article-layout { display: grid; grid-template-columns: 1fr 260px; gap: 60px; align-items: start; }
+
+  .hook { font-size: 17px; color: var(--mid); line-height: 1.72; padding-bottom: 36px; border-bottom: 2px solid var(--black); margin-bottom: 40px; }
+  .hook strong { color: var(--black); font-weight: 700; }
+
+  .points { display: flex; flex-direction: column; }
+  .point { display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 32px 0; border-bottom: 1px solid var(--rule); align-items: start; }
+  .point:last-child { border-bottom: none; }
+  .point-num { font-size: 32px; font-weight: 900; color: var(--rule); line-height: 1; letter-spacing: -0.04em; padding-top: 2px; }
+  .point-title { font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 10px; line-height: 1.3; }
+  .point-body { font-size: 15px; color: var(--mid); line-height: 1.72; }
+  .point-body strong { color: var(--black); font-weight: 600; }
+  .point-body p { margin-bottom: 14px; }
+  .point-body p:last-child { margin-bottom: 0; }
+
+  .list-items { display: flex; flex-direction: column; }
+  .list-item { display: grid; grid-template-columns: 52px 1fr; gap: 20px; padding: 32px 0; border-bottom: 1px solid var(--rule); align-items: start; }
+  .list-item:last-child { border-bottom: none; }
+  .list-badge { width: 36px; height: 36px; background: var(--black); color: white; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; border-radius: 3px; flex-shrink: 0; margin-top: 2px; }
+  .list-item-title { font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 10px; line-height: 1.3; }
+  .list-item-body { font-size: 15px; color: var(--mid); line-height: 1.72; }
+  .list-item-body strong { color: var(--black); font-weight: 600; }
+  .list-item-body p { margin-bottom: 14px; }
+  .list-item-body p:last-child { margin-bottom: 0; }
+  .verdict { display: inline-block; margin-top: 12px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--rule); padding: 3px 8px; border-radius: 2px; }
+
+  .cta-block { margin-top: 48px; padding: 32px; background: var(--black); color: white; border-radius: 3px; }
+  .cta-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+  .cta-headline { font-size: 17px; font-weight: 700; color: white; line-height: 1.4; margin-bottom: 10px; }
+  .cta-sub { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+  .cta-action { margin-top: 18px; font-size: 13px; font-weight: 700; color: white; letter-spacing: 0.02em; }
+
+  .sidebar { display: flex; flex-direction: column; gap: 12px; }
+  .sidebar-card { background: var(--bg-section); border: 1px solid var(--rule); border-radius: 3px; padding: 18px 20px; }
+  .sidebar-card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .sidebar-card-body { font-size: 13px; color: var(--mid); line-height: 1.6; }
+  .sidebar-card-body strong { color: var(--black); font-weight: 600; }
+  .sidebar-list { display: flex; flex-direction: column; }
+  .sidebar-list-item { font-size: 12px; color: var(--mid); padding: 6px 0; border-bottom: 1px solid var(--rule); display: flex; gap: 8px; line-height: 1.5; }
+  .sidebar-list-item:last-child { border-bottom: none; }
+  .sidebar-list-item span:first-child { color: var(--black); font-weight: 700; flex-shrink: 0; }
+  .fit-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 2px; margin-top: 4px; }
+  .fit-high { background: #111; color: white; }
+  .fit-none { background: #e5e5e5; color: #555; }
+
+  .wc-note { margin-top: 12px; font-size: 11px; color: var(--muted); font-style: italic; }
+
+  .site-footer { padding: 32px 48px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--rule); }
+  .site-footer .footer-logo { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); }
+  .site-footer p { font-size: 11px; color: var(--muted); }
+
+  @media (max-width: 860px) {
+    .site-header, .cover, .toc, .article, .section-divider, .site-footer { padding-left: 20px; padding-right: 20px; }
+    .article-layout { grid-template-columns: 1fr; gap: 40px; }
+    .toc-grid { grid-template-columns: 1fr; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="logo">Skyvane</span>
+  <span class="header-meta">FluffCo Down Feather — Creative Concepts</span>
+</header>
+
+<section class="cover">
+  <div class="cover-label">Creative Brief Output — Expanded</div>
+  <h1>FluffCo Down Feather Pillow</h1>
+  <p class="cover-desc">6 pre-sell article concepts built for cold Meta traffic. Each article is approximately 1,500 words. No prices in body copy. All claims verified against the live LP. Ready for production briefing on approval.</p>
+  <div class="cover-meta">
+    <div class="cover-meta-item"><span class="label">Client</span><span class="value">FluffCo</span></div>
+    <div class="cover-meta-item"><span class="label">Product</span><span class="value">Down Feather Pillow</span></div>
+    <div class="cover-meta-item"><span class="label">Channel</span><span class="value">Meta</span></div>
+    <div class="cover-meta-item"><span class="label">Audience</span><span class="value">Cold Traffic</span></div>
+    <div class="cover-meta-item"><span class="label">Formats</span><span class="value">X Reasons Why + Listicle</span></div>
+    <div class="cover-meta-item"><span class="label">Target Length</span><span class="value">~1,500 words each</span></div>
+    <div class="cover-meta-item"><span class="label">Destination</span><span class="value">get.fluff.co/down-feather-pillow</span></div>
+  </div>
+</section>
+
+<section class="toc">
+  <div class="toc-label">Contents</div>
+  <div class="toc-grid">
+    <div class="toc-col">
+      <div class="toc-col-label">X Reasons Why</div>
+      <a class="toc-item" href="#c1"><span class="toc-num">01</span><span class="toc-title">5 Reasons Why Hotel Pillows Feel Better Than Anything You've Ever Slept On at Home</span><span class="toc-tag">Hotel</span></a>
+      <a class="toc-item" href="#c2"><span class="toc-num">02</span><span class="toc-title">3 Reasons Why Real Down Feathers Changed the Way I Sleep</span><span class="toc-tag">Material</span></a>
+      <a class="toc-item" href="#c3"><span class="toc-num">03</span><span class="toc-title">Why the Most Expensive Pillow You'll Ever Buy Is Actually the Cheapest</span><span class="toc-tag">Price</span></a>
+    </div>
+    <div class="toc-col">
+      <div class="toc-col-label">Listicle</div>
+      <a class="toc-item" href="#c4"><span class="toc-num">04</span><span class="toc-title">The 5 Sleeper Types. And Why Most Pillows Only Work for One of Them</span><span class="toc-tag listicle">Sleep Type</span></a>
+      <a class="toc-item" href="#c5"><span class="toc-num">05</span><span class="toc-title">What Bad Sleep Is Actually Costing You Every Day. And the Fix Most People Never Think to Try</span><span class="toc-tag listicle">Cost</span></a>
+      <a class="toc-item" href="#c6"><span class="toc-num">06</span><span class="toc-title">7 Pillows I Tried Before I Finally Stopped Waking Up Tired</span><span class="toc-tag listicle">Regret</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider">
+  <h3>Format 01 — X Reasons Why</h3>
+  <span>Concepts 01, 02, 03</span>
+</div>
+
+<!-- CONCEPT 01 -->
+<article class="article" id="c1">
+  <div class="article-eyebrow">
+    <span class="article-num">01</span>
+    <span class="format-tag">X Reasons Why</span>
+    <span class="angle-tag">Hotel Construction Angle</span>
+  </div>
+  <h2>5 Reasons Why Hotel Pillows Feel Better Than Anything You've Ever Slept On at Home</h2>
+
+  <div class="article-layout">
+    <div class="article-main">
+      <p class="hook">
+        You know the feeling. You check into a nice hotel, drop your bag, and fall face-first onto the bed. And something is just <strong>immediately different</strong>. Not the room. Not the thread count. The pillow. The way your head sinks into it and then stops at exactly the right depth. The way it stays cool. The way it doesn't go flat at 2am. You lie there thinking, why don't my pillows at home feel like this? Then you get back from the trip, drop your bag, fall face-first onto your own bed, and you feel it. The difference. The slight disappointment. The awareness that something is missing and you can't quite name what it is. Here's what it is. And here's why you've never been able to replicate it.
+      </p>
+
+      <div class="points">
+        <div class="point">
+          <div class="point-num">01</div>
+          <div class="point-content">
+            <div class="point-title">The Pillow-in-Pillow Build Nobody Tells You About</div>
+            <div class="point-body">
+              <p>The pillow in your hotel room is not one pillow. It's two, engineered to work together as a single unit. There's an outer layer of soft, airy down wrapped around an inner core of firmer feathers. The outer layer gives you that immediate cloud-like softness the moment your head makes contact. The inner core provides the structural support that keeps your neck properly aligned through the whole night. Neither layer can do what the combination does. Soft alone goes flat. Firm alone feels stiff. Together, they solve the problem that every single-fill pillow on the market either ignores or gets wrong.</p>
+              <p>Most retail pillows, the ones you pull off a shelf in a bedding store or order online, are a single uniform fill. Memory foam holds one fixed shape. Polyester fill compresses into a flat disk. Buckwheat is crunchy. Latex is too heavy. None of them are doing what a hotel pillow does, which is offer softness and support simultaneously, in the same product, without any adjustment or compromise. When you felt the hotel pillow and thought it was somehow just better, you were right. It was using construction that most retail options never bother with.</p>
+              <p>This is why you can't replicate the hotel feeling by spending more money on a standard retail pillow. You can buy the most expensive memory foam pillow on the market and it still won't feel like a hotel pillow, because it's a fundamentally different product. The construction is different. The material is different. The philosophy of how comfort and support are supposed to work together is different. The hotel pillow isn't just a better version of what you've been buying. It's a different category entirely.</p>
+            </div>
+          </div>
+        </div>
+        <div class="point">
+          <div class="point-num">02</div>
+          <div class="point-content">
+            <div class="point-title">Real Down Clusters That Actually Bounce Back</div>
+            <div class="point-body">
+              <p>Press down on a hotel pillow and let go. It bounces back almost immediately to its original shape. Do the same with most retail pillows and watch what happens. Memory foam slowly returns. Polyester fill stays compressed, maybe recovers a little. Buckwheat hull doesn't move at all. The hotel pillow's instant recovery is not a coincidence or a marketing claim. It's the physics of real down feathers at work.</p>
+              <p>Real down has a three-dimensional cluster structure. Each individual cluster branches outward in multiple directions, with thousands of tiny filaments creating pockets of air between them. When you apply pressure, those filaments compress. When you release, the structure has enough elasticity to push back to its original form. This is called natural re-loft, and it's the reason a down pillow on night 300 can feel the same as it did on night one, while a synthetic pillow from the same purchase date is already half its original thickness.</p>
+              <p>The practical difference in sleep quality is significant. A pillow that maintains its loft through the night means your neck stays in the right position from the time you fall asleep to the time your alarm goes off. A pillow that goes flat by 2am means your neck has been at a compromised angle for the second half of your sleep without you even registering it. You don't feel it while it's happening. You feel it in your shoulders when you wake up. The neck stiffness that you've accepted as just how mornings are often isn't inevitable. It's what happens when your pillow stops doing its job halfway through the night.</p>
+            </div>
+          </div>
+        </div>
+        <div class="point">
+          <div class="point-num">03</div>
+          <div class="point-content">
+            <div class="point-title">Temperature That Stays Neutral While You Sleep</div>
+            <div class="point-body">
+              <p>The cool side of the pillow is a myth that real down makes irrelevant. The habit of flipping your pillow to the cooler side in the middle of the night is something most people accept as just part of how sleeping works. It isn't. It's what happens when your pillow can't breathe properly. Synthetic fill traps heat because the material has no natural ventilation. The heat from your head builds up in the fill and has nowhere to go. You flip the pillow and get the other side, which is cool for a few minutes until it also warms up. Then you're back where you started.</p>
+              <p>Real down doesn't work this way. Down feathers evolved over millions of years to keep waterfowl comfortable in extreme and variable conditions, from sub-zero winters to cold ocean water to warm summer air. The same properties that make down an extraordinary natural insulator for birds make it an extraordinary temperature regulator for sleeping. The air trapped between down clusters acts as a thermal buffer. When your body temperature rises, the down releases heat through the spaces between filaments. When the room is cold, the structure retains warmth. It adjusts in real time to what you actually need, rather than simply accumulating heat until you have to intervene.</p>
+              <p>People who make the switch to real down consistently mention temperature as one of the most immediately noticeable changes. Not the softness, which they expected. The temperature. The fact that they stopped waking up overheated. That they stopped flipping the pillow. That they stopped kicking off the covers at 3am because their head was too warm. These aren't small quality of life improvements. They're the difference between interrupted sleep and sleep that actually runs the full cycle, uninterrupted, all night.</p>
+            </div>
+          </div>
+        </div>
+        <div class="point">
+          <div class="point-num">04</div>
+          <div class="point-content">
+            <div class="point-title">A Cotton Shell That's Doing Real Work</div>
+            <div class="point-body">
+              <p>The outer shell of a hotel pillow is not an afterthought. It's 300-thread-count 100% cotton, stitched with double-needle piped edges around the perimeter. The high thread count matters for two reasons. First, it creates a weave tight enough to prevent individual feathers from poking through the fabric, which is the single most common complaint about cheaper down pillows. Second, it breathes in sync with the fill rather than trapping moisture against the cotton like a lower-quality shell would. The piped edges aren't decorative. They reinforce the seams where structural failure most often happens in pillows that get heavy daily use.</p>
+              <p>When you stay in a hotel that has a well-made pillow, that pillow has been slept on by hundreds of guests and laundered repeatedly. It still holds its shape. The seams haven't split. The fill hasn't migrated to the edges and left the center hollow. The cotton feels the same as it did on day one. That's not luck. That's what happens when the shell is built to the same standard as the fill inside it. A premium fill inside a cheap shell is still a cheap pillow. The shell is where the longevity lives.</p>
+              <p>Most retail pillows cut costs on the shell. You can feel it within a few washes. The cotton starts to thin. The edges start to fray. The fill starts to work its way through the weave. The pillow you thought was going to last years is falling apart at the seams, literally, within months. A 300TC cotton shell with double-needle construction doesn't do that. It holds up to the kind of nightly compression and washing that a pillow actually experiences over years of real use.</p>
+            </div>
+          </div>
+        </div>
+        <div class="point">
+          <div class="point-num">05</div>
+          <div class="point-content">
+            <div class="point-title">Certified Materials With a Supply Chain You Can Actually Verify</div>
+            <div class="point-body">
+              <p>Five-star hotels don't guess about what's in their pillows. When you're putting something next to a guest's face for eight hours, the sourcing and processing of the fill matters. The down in a genuine hotel-grade pillow is OEKO-TEX Certified, meaning every component has been independently tested and verified to be free from harmful substances. The certification isn't self-reported. It requires third-party laboratory testing across the full supply chain, from the sourcing of the raw material through the processing and final product assembly.</p>
+              <p>This matters for two reasons that have nothing to do with ethics, though those matter too. First, properly sourced and processed down performs better. Down that has been through a rigorous multi-step cleaning and sanitization process has better loft, better breathability, and longer lifespan than uncertified alternatives. The cleaning removes allergens, dust, and impurities that would otherwise degrade the fill's performance over time. Second, certified down is hypoallergenic in a meaningful, verifiable way, not in the way brands use the word on packaging without any testing behind it.</p>
+              <p>When you buy a cheap pillow online, you have no way to know what's inside it, how it was processed, or whether the fill was tested for anything. You're taking the brand's word for it, and the brand often doesn't know either because they bought from a supplier who bought from another supplier. The OEKO-TEX certification closes that gap. You know exactly what you're sleeping on. You know it's been tested. You know it meets an international standard that doesn't bend to marketing language. That's not a small thing when you're talking about something you have your face against for a third of your life.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-block">
+        <div class="cta-label">Ready to make the switch</div>
+        <div class="cta-headline">FluffCo built the same pillow. Direct to your door.</div>
+        <div class="cta-sub">Pillow-in-pillow construction. OEKO-TEX Certified Canadian duck down. 300TC cotton shell. The same build used in 5-star hotels worldwide. Free returns. 30-night sleep guarantee. Over 5,000 five-star reviews.</div>
+        <div class="cta-action">See if it's right for your sleep style →</div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Angle</div>
+        <div class="sidebar-card-body">Hotel construction education. Positions FluffCo as the accessible version of something people have already experienced and loved but couldn't buy until now.</div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Cold Traffic Fit</div>
+        <div class="sidebar-card-body"><span class="fit-badge fit-high">Very High</span><div style="margin-top:8px;">Activates a universal shared memory before any product mention. No assumed brand knowledge required.</div></div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Proof Points</div>
+        <div class="sidebar-list">
+          <div class="sidebar-list-item"><span>→</span> Pillow-in-pillow construction</div>
+          <div class="sidebar-list-item"><span>→</span> OEKO-TEX Certified</div>
+          <div class="sidebar-list-item"><span>→</span> 300TC cotton shell</div>
+          <div class="sidebar-list-item"><span>→</span> Natural re-loft</div>
+          <div class="sidebar-list-item"><span>→</span> Temperature regulation</div>
+          <div class="sidebar-list-item"><span>→</span> 30-night guarantee</div>
+          <div class="sidebar-list-item"><span>→</span> 5,000+ five-star reviews</div>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Down Alternative Risk</div>
+        <div class="sidebar-card-body"><span class="fit-badge fit-none">None</span><div style="margin-top:8px;">All contrasts are hotel pillow vs. generic store-bought. Down Alternative never referenced.</div></div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- CONCEPT 02 -->
+<article class="article" id="c2">
+  <div class="article-eyebrow">
+    <span class="article-num">02</span>
+    <span class="format-tag">X Reasons Why</span>
+    <span class="angle-tag">Material Honesty Angle</span>
+  </div>
+  <h2>3 Reasons Why Real Down Feathers Changed the Way I Sleep</h2>
+
+  <div class="article-layout">
+    <div class="article-main">
+      <p class="hook">
+        Most people have slept on a real down pillow once or twice. A hotel. A friend's guest bedroom. A vacation rental that turned out to be much nicer than the photos suggested. And almost everyone who has that experience remembers it. Not as a passing thought, but as something they think about when they're lying on their own pillow at home, wondering why it doesn't feel the same. There's something about genuine down that's hard to articulate until you've been in contact with it. <strong>It isn't just soft. It moves differently. It breathes differently. It feels alive in a way that nothing else does.</strong> I spent years trying to understand why. Here's what I found, and why it changed the way I approach sleep entirely.
+      </p>
+
+      <div class="points">
+        <div class="point">
+          <div class="point-num">01</div>
+          <div class="point-content">
+            <div class="point-title">The Structure Is Unlike Anything Else on the Market</div>
+            <div class="point-body">
+              <p>Real down feathers aren't flat. Most people picture a feather and think of the long, quill-based kind you'd find in a bird's wing. Down is different. Down comes from the chest and underbelly of ducks and geese, and it has no rigid quill. Each cluster branches outward in three dimensions from a central point, with thousands of tiny filaments radiating in every direction and creating an almost spherical structure that's mostly air. When a pillow is filled with real down clusters, what you're actually sleeping on is millions of these tiny three-dimensional structures, each one trapping a small pocket of air, stacked and interlocked throughout the fill.</p>
+              <p>What this means in practice is that the pillow can do something no flat or rigid fill can do: <strong>it molds around the specific shape of your head and neck</strong>, redistributing the volume of the fill in response to the exact pressure you're applying. Not in a slow, memory-foam way that takes time to adjust and then holds a fixed shape. In a live, responsive way that moves with you. When you shift from your side to your back in the middle of the night, the down redistributes. When you push the pillow up against the headboard and read for twenty minutes, it conforms to a different shape. When you fall asleep again, it adjusts back. The fill is responding to you in real time, which is why down pillows feel custom in a way that fixed-shape fills never quite manage.</p>
+              <p>This also explains why the support from a down pillow feels different from the support of a foam pillow even when both are described as "supportive." Foam holds a predetermined shape and you conform to it. Down supports by conforming to you. Those are opposite experiences, and only one of them is actually responsive to what your neck and head need at any given moment of the night.</p>
+            </div>
+          </div>
+        </div>
+        <div class="point">
+          <div class="point-num">02</div>
+          <div class="point-content">
+            <div class="point-title">It Regulates Temperature in a Way No Added Coating Can Match</div>
+            <div class="point-body">
+              <p>The cooling pillow category is large and growing, and most of it is built on a simple premise: take a foam pillow, add a gel layer or a phase-change material coating, and charge a premium for the cooling effect. This works. For about fifteen minutes. Then your body warms up the gel and the temperature advantage disappears, leaving you with a heavy foam pillow and no other options until you flip it to the other side. The cooling was a surface treatment, not a structural property of the fill. It delays the problem rather than solving it.</p>
+              <p>Real down doesn't need a coating. <strong>Temperature regulation is structural.</strong> The three-dimensional cluster structure that creates the loft also creates thousands of tiny air channels running through the fill. Those channels allow heat to move through the pillow rather than accumulating in it. Down feathers evolved over millions of years to keep waterfowl comfortable in conditions that range from freezing ocean water to dry summer air, often in the same day. That thermal adaptability is built into the biology of the feather itself. When you sleep on real down, the fill is actively wicking moisture away from your face and managing the temperature differential between your skin temperature and the ambient room temperature. It does this all night without any intervention from you.</p>
+              <p>The practical result for most people is a stop to the 3am pillow flip. The first few nights on real down, you'll notice you're sleeping through periods that would previously have woken you up feeling overheated. You won't necessarily wake up and think, "my pillow is regulating my temperature." You'll wake up in the morning and realize you slept through. That's the whole point. The best sleep interventions are the ones you don't notice because nothing went wrong to notice.</p>
+            </div>
+          </div>
+        </div>
+        <div class="point">
+          <div class="point-num">03</div>
+          <div class="point-content">
+            <div class="point-title">It Gets Better the Longer You Sleep on It</div>
+            <div class="point-body">
+              <p>This is the thing that surprises people most when they switch to real down. Every other pillow category follows the same trajectory: new and good, then gradually degrading, then flat and useless, then replaced. Memory foam goes from firm and supportive to compressed and hot over about eighteen months. Polyester fill goes from fluffy to flat in six. Buckwheat hulls break down and compress over a few years. The story of most pillows is a story of decline from the first night. You're always sleeping on the best it will ever be, and it's only getting worse from there.</p>
+              <p>Real down works differently. The clusters soften slightly with use and begin to settle into a consistent, even loft distribution throughout the fill. A new down pillow can feel slightly uneven until the fill has been slept on enough times to distribute itself properly. After a few weeks, it settles. After a few months, it has conformed to the general shape of how you use it. After a year, it feels broken-in rather than broken down. The difference is structural: down clusters don't permanently deform under compression because their three-dimensional structure has enough elasticity to keep returning to its original shape. The clusters bounce back after every night, and the fill as a whole maintains its loft in a way that flat or rigid fills fundamentally cannot.</p>
+              <p>The maintenance is also simpler than people expect. A quick shake each morning restores the full volume by redistributing any clusters that have shifted during the night. The washable pillow protector included with the FluffCo Down Feather pillow keeps the shell clean so the fill never has to be washed, which is what causes most down pillow failures in the first place. Proper care means a quality down pillow lasts years, often half a decade or more, while delivering a sleep experience that gets more familiar and comfortable with every night rather than less. That's not how pillows are supposed to work. Except it is, if the pillow is made correctly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-block">
+        <div class="cta-label">Ready to feel the difference</div>
+        <div class="cta-headline">30 nights to decide. Free returns if it isn't right for you.</div>
+        <div class="cta-sub">OEKO-TEX Certified Canadian duck down. Pillow-in-pillow construction. 300TC cotton shell. Firm or Soft. Free pillow protector included. Made in Canada. 790,000+ happy sleepers.</div>
+        <div class="cta-action">Try it for 30 nights. Return it if it isn't right →</div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Angle</div>
+        <div class="sidebar-card-body">Material discovery. Frames real down as something most people haven't properly experienced at home. Aspirational, not comparative.</div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Cold Traffic Fit</div>
+        <div class="sidebar-card-body"><span class="fit-badge fit-high">High</span><div style="margin-top:8px;">Written for someone who has never thought deeply about pillow fill. No jargon. Pure experiential framing.</div></div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Proof Points</div>
+        <div class="sidebar-list">
+          <div class="sidebar-list-item"><span>→</span> Down cluster structure</div>
+          <div class="sidebar-list-item"><span>→</span> Natural temperature regulation</div>
+          <div class="sidebar-list-item"><span>→</span> Natural re-loft over time</div>
+          <div class="sidebar-list-item"><span>→</span> Free pillow protector</div>
+          <div class="sidebar-list-item"><span>→</span> 30-night guarantee</div>
+          <div class="sidebar-list-item"><span>→</span> 790,000+ happy sleepers</div>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Down Alternative Risk</div>
+        <div class="sidebar-card-body"><span class="fit-badge fit-none">None</span><div style="margin-top:8px;">No synthetic comparison. Argument is about what real down does, not what other fills don't.</div></div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- CONCEPT 03 -->
+<article class="article" id="c3">
+  <div class="article-eyebrow">
+    <span class="article-num">03</span>
+    <span class="format-tag">X Reasons Why</span>
+    <span class="angle-tag">Price Reframe Angle</span>
+  </div>
+  <h2>Why the Most Expensive Pillow You'll Ever Buy Is Actually the Cheapest</h2>
+
+  <div class="article-layout">
+    <div class="article-main">
+      <p class="hook">
+        Spending real money on a pillow feels irrational to most people. We're wired to treat pillows as a commodity. Something you replace when it goes flat. Something you grab at the store without much thought. The idea of paying a premium for one feels like a category error, like paying too much for a toothbrush. But that instinct is built on a faulty assumption: that all pillows are basically the same thing at different price points. They're not. And when you look at the actual math of what you spend on sleep over time, <strong>the expensive pillow isn't the irresponsible choice. Cheap pillows are.</strong> Here's why.
+      </p>
+
+      <div class="points">
+        <div class="point">
+          <div class="point-num">01</div>
+          <div class="point-content">
+            <div class="point-title">The Cost Per Night Is Almost Nothing</div>
+            <div class="point-body">
+              <p>People rarely do the math on per-use cost when they're buying a pillow. They look at the price tag and make a judgment about whether it feels like too much to spend on a single item in a single transaction. That's a completely understandable way to make a purchasing decision. It's also the reason most people end up spending more money on pillows over time than they would have if they'd bought one good one.</p>
+              <p>A quality down feather pillow, maintained properly, lasts five to seven years. That's somewhere between 1,825 and 2,555 nights of use from a single purchase. Run that math and the per-night cost is less than two cents. To put that in context: the average person doesn't hesitate to spend money on a cup of coffee that's consumed in ten minutes and gone. They'll buy that coffee every morning without thinking about it. The same person who does that math automatically for every other purchase category looks at a premium pillow and sees only the total price, not the per-use cost. When you account for the per-use cost, a good pillow is one of the cheapest purchases you'll make this year in terms of the value delivered per dollar spent.</p>
+              <p>The reason the comparison matters is not to make anyone feel guilty about buying coffee. It's to illustrate that our intuitions about what's "expensive" are often based on sticker price rather than actual cost of use. A premium pillow bought once and used for five years is cheaper per use than almost anything else you own. The sticker price is the only expensive thing about it.</p>
+            </div>
+          </div>
+        </div>
+        <div class="point">
+          <div class="point-num">02</div>
+          <div class="point-content">
+            <div class="point-title">Cheap Pillows Are Secretly One of Your Most Expensive Habits</div>
+            <div class="point-body">
+              <p>Here's the math that most people never do. A standard budget polyester pillow typically needs replacing every twelve to eighteen months. The fill compresses permanently and stops providing adequate support. The cover starts to thin and fray. The pillow is no longer doing its job and you replace it, usually without connecting that decision to all the other replacement decisions that came before it. Over five years, that's three to four complete replacements. Add those up and you've spent more on pillows than you would have on a single quality option bought once, and you've slept worse the entire time.</p>
+              <p>The replacement cycle is the hidden cost that nobody accounts for when they're standing in a store choosing the cheaper option. It feels like the responsible financial decision in the moment. It isn't. It's the choice that requires you to make the same financial decision three more times over the next five years, plus deal with the diminishing sleep quality that comes with a pillow that's been slowly degrading since the day you bought it. The budget choice is a subscription that renews every year whether you want it to or not. A quality down pillow is a one-time purchase that lasts long enough that the math stops looking like a comparison at all.</p>
+              <p>This doesn't even account for the secondary costs of poor sleep, which are real but harder to quantify. Productivity, mood, physical recovery, immune function. These things all degrade under consistently poor sleep. Putting a dollar value on them is complicated. But if you've ever had a genuinely bad night's sleep and then tried to work a full day, you have a first-person sense of what the cost looks like.</p>
+            </div>
+          </div>
+        </div>
+        <div class="point">
+          <div class="point-num">03</div>
+          <div class="point-content">
+            <div class="point-title">You're Getting the Factory Price, Not the Retail Price</div>
+            <div class="point-body">
+              <p>When you buy a premium pillow in a department store or a luxury bedding retailer, you're not paying for a better pillow. You're paying for the supply chain between the factory and the store. That chain includes the manufacturer, a regional distributor, a logistics company, the retail space, the sales staff, the store's marketing budget, and the retailer's margin on top of all of it. Each link in that chain adds cost. None of it adds anything to the quality of what you sleep on.</p>
+              <p>The same construction used in Four Seasons and Ritz-Carlton properties costs significantly more when purchased through a luxury retail channel than it does when purchased directly from a company that manufactures and ships to your door. This isn't a knockoff or a compromise. It's the same hotel-grade build, the same OEKO-TEX Certified Canadian duck down, the same pillow-in-pillow construction, the same 300-thread-count cotton shell. The difference is that you're buying direct, which means the only costs you're paying for are the actual cost of making the pillow and getting it to you. No distributor margin. No showroom overhead. No retail markup.</p>
+              <p>That gap between retail pricing and factory-direct pricing for premium bedding is significant. When you see what hotels pay for the same construction and compare it to what a luxury retailer charges, the direct-to-consumer price starts looking not just reasonable but genuinely competitive. You're getting hotel-grade quality at a fraction of what the retail markup would be for a comparable product, and you're getting it shipped directly to your door in four to six days.</p>
+            </div>
+          </div>
+        </div>
+        <div class="point">
+          <div class="point-num">04</div>
+          <div class="point-content">
+            <div class="point-title">Seven Independent Publications Reached the Same Conclusion</div>
+            <div class="point-body">
+              <p>If the financial argument hasn't fully landed yet, consider what happens when you outsource the research to people who have no financial stake in the outcome. Seven major publications have independently reviewed the FluffCo Down Feather Pillow. Not in partnership with the brand, not in sponsored content. In editorial reviews where the job is to give readers an honest answer about whether a product is worth their money.</p>
+              <p>Architectural Digest named it Best Soft Pillow in their Sleep Awards. Apartment Therapy gave it Best Overall Pillow. Men's Health named it Best Down Pillow. Healthline called it an Editor's Pick. Oprah Daily awarded it a Sleep O-Award in 2024. CNN Underscored featured it in 2026. PureWow gave it a 95 out of 100, with a perfect score on Quality and a 19 out of 20 on both Value and Fluffiness Over Time. That last score is the most revealing one. Fluffiness over time, the ability of the pillow to maintain its loft rather than flattening out, is exactly the metric that determines whether you're buying once or replacing repeatedly. The independent reviewers tested it over time and confirmed that it holds up.</p>
+              <p>When seven different editorial teams across seven different publications, each with their own testing criteria and readership, arrive at the same positive verdict, that's not marketing. That's consensus. The research has already been done by people who had no reason to do you any favors. The verdict is consistent. The only question is how many more nights you want to spend on a pillow that hasn't been tested at all.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-block">
+        <div class="cta-label">See for yourself</div>
+        <div class="cta-headline">The pillow seven independent publications recommended.</div>
+        <div class="cta-sub">OEKO-TEX Certified Canadian duck down. Pillow-in-pillow construction. 300TC cotton shell. Firm or Soft. Free returns. 30-night sleep guarantee. Over 5,000 five-star reviews.</div>
+        <div class="cta-action">Check current pricing and availability →</div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Angle</div>
+        <div class="sidebar-card-body">Price objection reframe. Attacks sticker shock using cost-per-night logic, replacement cycle math, and DTC vs. retail pricing. No specific price figures in the article body.</div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Cold Traffic Fit</div>
+        <div class="sidebar-card-body"><span class="fit-badge fit-high">High</span><div style="margin-top:8px;">Reframes the purchase decision before the reader hits the LP price. Arrives warm to the number.</div></div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">LP-Confirmed Press Only</div>
+        <div class="sidebar-list">
+          <div class="sidebar-list-item"><span>→</span> Architectural Digest</div>
+          <div class="sidebar-list-item"><span>→</span> Apartment Therapy</div>
+          <div class="sidebar-list-item"><span>→</span> Men's Health</div>
+          <div class="sidebar-list-item"><span>→</span> Healthline</div>
+          <div class="sidebar-list-item"><span>→</span> PureWow 95/100</div>
+          <div class="sidebar-list-item"><span>→</span> Oprah Daily 2024</div>
+          <div class="sidebar-list-item"><span>→</span> CNN Underscored 2026</div>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Down Alternative Risk</div>
+        <div class="sidebar-card-body"><span class="fit-badge fit-none">None</span><div style="margin-top:8px;">All comparisons are against generic cheap pillows and luxury retail pricing. Down Alternative never referenced.</div></div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<div class="section-divider">
+  <h3>Format 02 — Listicle</h3>
+  <span>Concepts 04, 05, 06</span>
+</div>
+
+<!-- CONCEPT 04 -->
+<article class="article" id="c4">
+  <div class="article-eyebrow">
+    <span class="article-num">04</span>
+    <span class="format-tag listicle">Listicle</span>
+    <span class="angle-tag">Sleep Position Angle</span>
+  </div>
+  <h2>The 5 Sleeper Types. And Why Most Pillows Only Work for One of Them</h2>
+
+  <div class="article-layout">
+    <div class="article-main">
+      <p class="hook">
+        If you've ever bought a pillow that felt perfect in the store and wrong in your bed, you weren't imagining things. Pillows are almost always designed and tested for one specific sleep position and then sold to everyone. The marketing doesn't mention this. The packaging says things like "all sleep positions" and "universal comfort" without explaining that a pillow optimized for back sleeping is working against a side sleeper every single night. <strong>Your sleep position isn't a preference. It's a structural requirement.</strong> The wrong pillow for how you sleep is creating physical stress on your neck and spine for six to eight hours straight, every night, whether you notice it in the moment or not. You notice it in the morning. Here's what each sleep type actually needs and why most of what's on the market isn't built for it.
+      </p>
+
+      <div class="list-items">
+        <div class="list-item">
+          <div class="list-badge">01</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Side Sleeper</div>
+            <div class="list-item-body">
+              <p>Side sleeping is the most common sleep position, and it's also the position that puts the most structural demand on a pillow. When you're on your side, there's a gap between your shoulder and your head. A properly sized pillow fills that gap and keeps your neck in a neutral, horizontal position relative to your spine. A pillow that's too flat lets your head drop toward the mattress. A pillow that's too firm pushes your head up at an angle. Either way, your neck is spending the night at a slight bend that accumulates as tension in the muscles on one side.</p>
+              <p>Most people who are side sleepers and wake up with recurring neck or shoulder stiffness assume it's a mattress problem, a posture problem, or just a getting-older problem. Very few think to look at the pillow. The morning stiffness that seems to come from nowhere is almost always traceable to a pillow that's losing its loft. It was fine when it was new. It's been compressing slowly for months. Now it's two centimeters thinner than it was and your neck is paying the price.</p>
+              <p>The FluffCo Down Feather in Firm gives side sleepers what they actually need: a pillow with enough height and structure to fill the shoulder gap consistently, night after night, without going flat. The feather core in the inner layer maintains the loft. The outer down layer softens the contact point so the support doesn't feel stiff. Side sleepers who've tried every other pillow tend to describe this combination as the first time they've slept without waking up sore.</p>
+              <span class="verdict">Recommended: Firm</span>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">02</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Back Sleeper</div>
+            <div class="list-item-body">
+              <p>Back sleeping is considered the most neutral position for spinal alignment, but it only stays that way if the pillow is doing its job correctly. The cervical spine has a natural inward curve when you're standing or sitting with good posture. When you lie on your back, a pillow that's too high pushes the head forward and flattens that curve. A pillow that's too low leaves the curve unsupported and allows the head to fall back slightly. Either extreme creates sustained pressure on the muscles and joints of the neck that builds over hours.</p>
+              <p>The ideal back-sleeping pillow is one that cradles the neck curve without lifting the head too far forward. The problem is that most fixed-fill pillows are either one loft or another. There's no adjustment, no responsiveness to the specific geometry of how your particular head and neck meet the pillow. You're conforming to the pillow. The pillow isn't responding to you.</p>
+              <p>The pillow-in-pillow construction of the Down Feather changes this. The outer down layer molds around the curve of the neck and distributes the contact pressure across a larger area. The inner feather core keeps the overall loft consistent and provides resistance where the neck needs it. The combination creates support that feels fitted rather than fixed, which means back sleepers can stay in position through the night without the small position adjustments that interrupt sleep cycles. Both the Firm and Soft options work for back sleepers. Firm for those who prefer more structure, Soft for those who sleep warm or prefer less resistance.</p>
+              <span class="verdict">Recommended: Firm or Soft</span>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">03</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Stomach Sleeper</div>
+            <div class="list-item-body">
+              <p>Stomach sleeping is the position that most sleep professionals consider the most mechanically challenging. When you're face down, your head has to turn to one side to breathe, which puts the neck in a rotational position for hours at a time. There's no way to fully eliminate the strain that comes with this. What you can do is minimize it by keeping the loft of the pillow as low as possible so that the angle of the neck rotation is as shallow as possible.</p>
+              <p>Stomach sleepers need a pillow that compresses almost completely flat under the weight of their head without disappearing entirely. A pillow that's too thick pushes the head up and amplifies the rotation angle. A pillow that's too thin provides no cushioning at all. Most brands don't offer a genuine low-loft option for stomach sleepers. They offer "soft" as if softness and low loft are the same thing. They're not. A soft high-loft pillow is still high-loft. It just squishes. The head sinks in and the neck angle is still steep.</p>
+              <p>The FluffCo Down Feather in Soft uses less fill density by design. It allows the pillow to compress to a genuinely low loft under the weight of a head without bottoming out, which would remove the cushioning entirely. Stomach sleepers who switch to the Soft option typically report two changes immediately: less neck rotation angle during the night, and less morning stiffness in the upper neck and jaw. These are connected. Less rotation angle means less sustained muscle tension. Less tension means less stiffness. It's the simplest pillow fix for stomach sleepers, and most brands don't offer it.</p>
+              <span class="verdict">Recommended: Soft</span>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">04</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Combo Sleeper</div>
+            <div class="list-item-body">
+              <p>Combo sleepers are the people for whom every pillow review is essentially useless. Reviews are written for people who know which position they sleep in and stay there. Combo sleepers are somewhere between side and back for the first half of the night, shift to stomach at some point, flip back over, and wake up in a position they don't fully remember getting into. For these sleepers, any pillow designed for a specific position is going to be wrong for at least part of the night.</p>
+              <p>The standard advice for combo sleepers is to pick the position they spend the most time in and optimize for that. This is reasonable advice when no better option exists. It becomes less reasonable when you realize that a down fill pillow can actually adapt to multiple positions in a way that no fixed-fill pillow can. Down clusters redistribute their volume in response to applied pressure. When you shift from your side to your back, the fill moves. When you move again, it moves again. The pillow is continuously adjusting to whatever position you're in rather than holding the shape of wherever you started.</p>
+              <p>This isn't a marginal difference. For someone who moves frequently during the night, a pillow that adapts to each position means less micro-adjustment disruption, fewer moments of semiconscious awareness that something isn't quite right, and more of the deep, uninterrupted sleep that actually produces the recovery and restoration your body needs. The Firm option gives combo sleepers enough structural loft to handle side-sleeping periods without collapsing, while still being responsive enough to adjust for back and stomach periods during the night.</p>
+              <span class="verdict">Recommended: Firm</span>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">05</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Hot Sleeper</div>
+            <div class="list-item-body">
+              <p>Hot sleepers are the group most aggressively targeted by pillow marketing, and usually the least well-served by it. The market is full of pillows with gel layers, phase-change materials, copper infusions, and cooling fabric covers. Most of these work by providing a cooler surface temperature at the moment of contact. Your head lands on something that feels cool. For a few minutes, that's enough. Then your body warms the contact surface and you're back to the same problem, just with a more expensive pillow.</p>
+              <p>The reason these surface treatments fail is that they address the symptom rather than the cause. The cause is that most pillow fills trap heat because their structure doesn't allow for airflow. Memory foam is essentially a solid block with limited breathability. Polyester fill packs tightly and traps air pockets that hold body heat. No surface coating changes what's happening at the fill level. The heat from your head moves through the surface treatment and into the fill, where it accumulates throughout the night.</p>
+              <p>Real down addresses this at the structural level. The three-dimensional cluster structure creates thousands of natural air channels running through the fill. Heat moves through those channels rather than accumulating in the fill material. This is the same property that makes down effective as insulation for outdoor gear in variable conditions: it breathes. The Soft option, which uses less fill density, provides the most airflow for hot sleepers. The slightly lower loft means less total fill mass to heat up, and the natural breathability of down means whatever heat does accumulate has pathways out. Hot sleepers who switch to real down typically stop reporting the 3am overheating problem entirely, not because of a cooling feature, but because the pillow is no longer trapping the heat that was causing the problem.</p>
+              <span class="verdict">Recommended: Soft</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-block">
+        <div class="cta-label">Find your fit</div>
+        <div class="cta-headline">Firm or Soft. Real down. Built for the way you actually sleep.</div>
+        <div class="cta-sub">OEKO-TEX Certified Canadian duck down. Pillow-in-pillow construction. Standard and King sizes. Free returns. 30-night sleep guarantee. Over 5,000 five-star reviews.</div>
+        <div class="cta-action">Find your firmness and try it for 30 nights →</div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Angle</div>
+        <div class="sidebar-card-body">Sleep position segmentation. Self-identification mechanic drives scroll depth. Readers locate themselves in the list before the product is introduced.</div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Cold Traffic Fit</div>
+        <div class="sidebar-card-body"><span class="fit-badge fit-high">Very High</span><div style="margin-top:8px;">Everyone knows their sleep position. Hook activates immediate personal relevance before any product mention.</div></div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Product Mapping</div>
+        <div class="sidebar-list">
+          <div class="sidebar-list-item"><span>→</span> Side sleeper: Firm</div>
+          <div class="sidebar-list-item"><span>→</span> Back sleeper: Firm or Soft</div>
+          <div class="sidebar-list-item"><span>→</span> Stomach sleeper: Soft</div>
+          <div class="sidebar-list-item"><span>→</span> Combo sleeper: Firm</div>
+          <div class="sidebar-list-item"><span>→</span> Hot sleeper: Soft</div>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Down Alternative Risk</div>
+        <div class="sidebar-card-body"><span class="fit-badge fit-none">None</span><div style="margin-top:8px;">Comparisons are against foam, latex, and gel fills only. Down Alternative never referenced.</div></div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- CONCEPT 05 -->
+<article class="article" id="c5">
+  <div class="article-eyebrow">
+    <span class="article-num">05</span>
+    <span class="format-tag listicle">Listicle</span>
+    <span class="angle-tag">Sleep Deprivation Cost Angle</span>
+  </div>
+  <h2>What Bad Sleep Is Actually Costing You Every Day. And the Fix Most People Never Think to Try</h2>
+
+  <div class="article-layout">
+    <div class="article-main">
+      <p class="hook">
+        Most people who sleep badly have decided it's just who they are. They've tried going to bed earlier. They've cut caffeine after noon. They've downloaded sleep tracking apps and spent three weeks staring at data that told them they weren't getting enough REM. Some of this helps a little. None of it helps as much as expected. And almost nobody, in the entire process of trying to fix their sleep, looks at the actual surface their head is resting on. <strong>The pillow. The thing that determines whether your neck is supported or strained, whether your temperature stays regulated or spikes at 2am, whether you complete full sleep cycles or interrupt them every ninety minutes.</strong> Here's what consistently poor sleep is costing you every day, and the one variable in your bedroom that most people have never actually addressed.
+      </p>
+
+      <div class="list-items">
+        <div class="list-item">
+          <div class="list-badge">01</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Foggy First Two Hours of Every Morning</div>
+            <div class="list-item-body">
+              <p>That slow start where nothing clicks into gear until mid-morning is something most people have accepted as just how they work before coffee. It isn't a caffeine problem. It's a sleep quality problem. The brain does most of its restoration work during the deeper stages of the sleep cycle, including consolidating information, clearing metabolic waste, and resetting neural pathways that govern attention and processing speed. If those cycles are being interrupted, shortened, or skipped entirely, the morning fog is the symptom.</p>
+              <p>The interruptions are often invisible. You don't consciously register waking up to adjust your pillow at 2am. You don't notice that you've been in a slightly wrong neck position for the last three hours and your body has been sending low-level distress signals that kept you out of deep sleep. You don't feel the moment your overheating pillow pulled you back into a lighter stage. You just feel, in the morning, like you didn't sleep as well as you thought you did. The fog is the bill for the interruptions the night before. Fix the interruptions and the fog starts to lift before the coffee even kicks in.</p>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">02</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Afternoon Energy Crash You Think Is a Food Problem</div>
+            <div class="list-item-body">
+              <p>The 2pm wall is one of the most universally experienced and least understood daily events in modern life. Most people attribute it to lunch, to blood sugar, to not eating the right thing at the right time. They fiddle with their diet and the crash keeps coming. They drink more coffee and manage it for a few hours. The crash itself doesn't go away because the cause isn't food.</p>
+              <p>When you don't complete enough full sleep cycles in a night, your body borrows energy reserves to get you through the first several hours of wakefulness. That borrowed energy runs out around mid-afternoon, which is when the debt comes due. The crash is your body calling in what it didn't get the night before. More caffeine can push the wall back by an hour or two, but it doesn't eliminate the underlying deficit. The only thing that eliminates the deficit is completing enough full, uninterrupted sleep cycles. A pillow that keeps you at a comfortable temperature, supports your neck in the right position, and doesn't need adjusting in the middle of the night is one of the simplest changes you can make to the conditions that allow those cycles to complete.</p>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">03</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Neck and Shoulder Tension That Won't Fully Resolve</div>
+            <div class="list-item-body">
+              <p>If you've been dealing with recurring neck and shoulder stiffness for months or years and none of the usual solutions have fully resolved it, the cause is almost certainly happening at night rather than during the day. The stiffness you feel in the morning is the accumulated result of hours spent in a slightly wrong position, with muscles on one side of the neck held in sustained tension while you slept. Daytime stretching and mobility work can provide temporary relief, but they can't fully counteract what's happening during the eight hours when you're not moving at all.</p>
+              <p>A pillow that's too flat for your sleep position means your head drops toward the mattress and the muscles on the upper side of your neck work all night to compensate. A pillow that's gone flat after months of use does the same thing, gradually, as the compression worsens. A pillow that maintains its loft consistently, night after night, keeps your neck in a neutral position for the full duration of sleep. The tension has nothing to compensate for. The muscles that have been chronically shortened on one side get a full night of length without strain. The stiffness that's been accumulating for months starts to clear within a week or two. Most people who experience this describe it as noticeably waking up differently, not in a dramatic way, just without the morning ritual of working out the kink in their neck before they can fully turn their head.</p>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">04</div>
+          <div class="list-item-content">
+            <div class="list-item-title">Your Mood Before the First Coffee</div>
+            <div class="list-item-body">
+              <p>Sleep deprivation has a well-documented effect on emotional regulation. The prefrontal cortex, which handles impulse control, rational decision-making, and the ability to hold competing priorities in mind simultaneously, is particularly sensitive to sleep quality. Under sleep deprivation, it's one of the first systems to show degraded function. The result shows up as increased irritability, lower tolerance for frustration, more reactive responses to minor stressors, and a general feeling of being on edge before the day has done anything to justify it.</p>
+              <p>Most people experiencing this don't connect it to their sleep quality because the connection isn't obvious. You slept eight hours. You weren't awake. The problem must be something else. But eight hours of interrupted, restless, temperature-disrupted sleep that never gets into the deeper restoration stages isn't the same as eight hours of proper sleep. The duration is the same. The quality and completeness of the cycles is not. People who fix their sleep environment consistently report that the mood change comes before anything else. Before the physical improvements. Before the energy changes. The morning irritability that felt like a personality trait starts to lift first, because emotional regulation is one of the most sensitive and most immediate downstream effects of sleep quality.</p>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">05</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Workout Recovery That Never Quite Completes</div>
+            <div class="list-item-body">
+              <p>If you train consistently and your recovery isn't keeping pace with the volume of work you're putting in, sleep is almost always a variable worth examining before anything else. Human growth hormone, which is the primary driver of muscle repair and adaptation after training, is released in pulses almost entirely during deep, slow-wave sleep. When sleep is interrupted or shallow, those pulses are shortened or missed. The repair that's supposed to happen overnight doesn't happen at the normal rate. You wake up more tired than you went to bed. You're sorer the next day than the training load justifies. Your progress plateaus in ways that more training doesn't fix, because the limiting factor isn't training stimulus, it's recovery capacity.</p>
+              <p>Professional athletes have understood this for a long time. Sleep optimization is treated as seriously as nutrition and training programming in high-performance environments. The specific investment that most of them make is in sleep surface quality, temperature management, and neck and spine alignment during sleep. A pillow that keeps the neck properly aligned reduces the physical stress signals that fragment sleep. A pillow that regulates temperature prevents the overheating episodes that pull you out of deep sleep at exactly the moments when HGH release is at its peak. These aren't marginal improvements for serious athletes. They're foundational variables in the recovery equation that most people who train recreationally have never addressed.</p>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">06</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Productive Hours You Never Fully Get Back</div>
+            <div class="list-item-body">
+              <p>Cognitive performance, particularly working memory, processing speed, and the ability to hold complex problems in mind while reasoning through them, degrades in a measurable and consistent way under sleep deprivation. What's less well understood is that mild, chronic sleep deprivation, the kind that comes from years of slightly impaired sleep rather than occasional all-nighters, produces the same kind of degradation at a lower level that's almost impossible to self-detect.</p>
+              <p>You don't feel impaired. Your output looks similar from the outside. You're hitting your deadlines, producing your deliverables, completing your tasks. But the decisions you're making, the quality of the reasoning behind those decisions, and the creative connections that aren't getting made because the neural pathways that produce them weren't restored last night, these are harder to see and almost impossible to attribute correctly. The meeting where you didn't say the right thing at the right moment. The project where the solution took three days instead of one. The email you had to rewrite four times. Mild chronic sleep deprivation operates in the background, quietly lowering the ceiling on what your thinking can produce, in ways that compound over months and years into something significant.</p>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">07</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The One Variable in Your Bedroom You've Never Upgraded</div>
+            <div class="list-item-body">
+              <p>Most people who've taken sleep seriously have upgraded their mattress. They've bought blackout curtains. They've tried white noise, magnesium supplements, sleep tracking rings. They've adjusted their bedtime, cut blue light, created a wind-down routine. These are all legitimate interventions. Some of them help significantly. Almost none of them address the pillow, which is the surface that your head, neck, and jaw actually spend eight hours in contact with.</p>
+              <p>The reason the pillow gets overlooked is that it's easy to underestimate. It doesn't feel as substantial as a mattress. The price points that most people associate with pillows don't suggest that there's a wide quality gap to be had. And unlike a mattress, which you can feel the difference on in a store, a pillow's true quality only reveals itself over time, when the loft starts to go and the support that was there on night one is gone by night 180.</p>
+              <p>The FluffCo Down Feather Pillow uses the same pillow-in-pillow construction found in the bedrooms of five-star hotels worldwide. OEKO-TEX Certified Canadian duck down. 300-thread-count cotton shell. Your choice of Firm or Soft fill density to match your sleep position. A free pillow protector to keep the fill performing properly over time. A 30-night guarantee because the difference it makes shows up over nights, not minutes. Over 790,000 people have made the switch. The one thing most of them have in common is that they wish they'd looked at the pillow earlier.</p>
+              <span class="verdict">The variable most people change last and notice first.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-block">
+        <div class="cta-label">Change the variable</div>
+        <div class="cta-headline">790,000 people stopped waking up tired. Here's what they switched to.</div>
+        <div class="cta-sub">OEKO-TEX Certified Canadian duck down. Pillow-in-pillow construction. Firm or Soft. Free returns. 30-night sleep guarantee. Over 5,000 five-star reviews.</div>
+        <div class="cta-action">Join 790,000 people who made the switch →</div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Angle</div>
+        <div class="sidebar-card-body">Sleep deprivation cost. Connects daily symptoms the reader is already living with to the pillow as the overlooked variable. Product enters as the logical resolution at item 07.</div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Cold Traffic Fit</div>
+        <div class="sidebar-card-body"><span class="fit-badge fit-high">Very High</span><div style="margin-top:8px;">Leads with recognized daily pain before any product mention. Reader self-identifies across multiple items before FluffCo appears.</div></div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Proof Points</div>
+        <div class="sidebar-list">
+          <div class="sidebar-list-item"><span>→</span> 790,000+ happy sleepers</div>
+          <div class="sidebar-list-item"><span>→</span> OEKO-TEX Certified</div>
+          <div class="sidebar-list-item"><span>→</span> Made in Canada</div>
+          <div class="sidebar-list-item"><span>→</span> Pillow-in-pillow construction</div>
+          <div class="sidebar-list-item"><span>→</span> 300TC cotton shell</div>
+          <div class="sidebar-list-item"><span>→</span> Firm/Soft options</div>
+          <div class="sidebar-list-item"><span>→</span> 30-night guarantee</div>
+          <div class="sidebar-list-item"><span>→</span> 5,000+ five-star reviews</div>
+          <div class="sidebar-list-item"><span>→</span> Free pillow protector</div>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Down Alternative Risk</div>
+        <div class="sidebar-card-body"><span class="fit-badge fit-none">None</span><div style="margin-top:8px;">No product comparisons of any kind until item 07. Down Alternative never referenced.</div></div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- CONCEPT 06 -->
+<article class="article" id="c6">
+  <div class="article-eyebrow">
+    <span class="article-num">06</span>
+    <span class="format-tag listicle">Listicle</span>
+    <span class="angle-tag">Pillow Replacement Angle</span>
+  </div>
+  <h2>7 Pillows I Tried Before I Finally Stopped Waking Up Tired</h2>
+
+  <div class="article-layout">
+    <div class="article-main">
+      <p class="hook">
+        I have spent a genuinely embarrassing amount of money on pillows. Not because I'm hard to please. Not because I have unusual requirements. Because every single one I bought promised something it couldn't actually deliver for more than a few months. The neck pain kept coming back. The pillow kept going flat at exactly the wrong time of night. I kept waking up at 3am to flip to the cool side, which helped for about four minutes. At some point the pattern became impossible to ignore. <strong>The problem wasn't me. It was the pillows.</strong> All of them had the same fundamental issues dressed up in different materials and different marketing. Here's every type I tried, what I was hoping for from each one, and exactly why each one failed.
+      </p>
+
+      <div class="list-items">
+        <div class="list-item">
+          <div class="list-badge">01</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Basic Polyester Fill</div>
+            <div class="list-item-body">
+              <p>The budget polyester pillow. The one that comes in a two-pack and costs about as much as a decent dinner. I started here because everyone starts here. It's cheap, it's available everywhere, and when you first take it out of the packaging it actually feels reasonably good. The fill is fluffy. The surface is soft. You think: this is fine.</p>
+              <p>About three months later, you notice the pillow isn't quite as high as it used to be. By six months, it's developed a permanent indentation where your head goes. By nine months, the fill has migrated toward the edges and the center is noticeably hollow. You fluff it and the volume comes back for about an hour, then the weight of your head flattens it again. By the one-year mark, you're sleeping on what is essentially a flat piece of fabric with some fill clumped unevenly around the edges.</p>
+              <p>The failure mode of polyester fill is built into the material. The individual fibers compress under sustained pressure and don't have the elasticity to fully recover. Each night makes the compression slightly worse. There's no maintenance routine that reverses this. You just replace it and start the cycle again. I replaced mine four times in about two years before I started looking for something structurally different.</p>
+              <span class="verdict">Verdict: Fine for 3 months. Done at 6. Replaced 4 times in 2 years.</span>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">02</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Memory Foam Block</div>
+            <div class="list-item-body">
+              <p>After the polyester cycle got old, I decided to spend real money and buy a memory foam pillow. Memory foam was supposed to be the premium solution. Medical grade. Orthopedic-approved. The kind of thing that held its shape. It did hold its shape. That was the problem.</p>
+              <p>Memory foam is designed for people who sleep in one position and stay there. I don't do that. I'm a side sleeper for the first hour, then I end up on my back, then I drift onto my stomach, then back to my side. By the time I'm on my back, the memory foam has already conformed to the shape of my head from when I was on my side. It holds that shape. I'm now on my back with a pillow that has a side-sleeping indentation. My neck is at the wrong angle. The pillow isn't adapting. I'm adapting to it, badly.</p>
+              <p>The heat was the other thing. Memory foam has almost no breathability. The heat from your head goes in and largely stays in. By the middle of the night, the pillow is noticeably warm and I've been flipping it regularly to get the cooler surface. This also does not work with memory foam the way it works with softer fills, because the bottom of the pillow has already been warmed by the ambient temperature of the bed. There is no cool side. There is only the top and the less-warm bottom. I stuck with it for four months out of stubbornness and gave it away to someone who, I assume, sleeps in exactly one position and never moves.</p>
+              <span class="verdict">Verdict: Holds shape instead of adapting to yours. Runs hot. Four months before I gave up.</span>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">03</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Cooling Gel Pillow</div>
+            <div class="list-item-body">
+              <p>After the overheating problem with the memory foam, I bought a pillow specifically marketed for cooling. It had a gel layer on one side, a foam core, and packaging that made it sound like it had solved the temperature problem that all pillows before it had failed to address. The marketing was effective. The product was not.</p>
+              <p>The gel layer is genuinely cold when you first lie on it. That's real. For approximately fifteen minutes, it provides a noticeably cooler surface temperature. Then your body warms it up and the effect disappears. The gel has absorbed as much temperature differential as it can and has equilibrated with your body heat. You're now lying on a slightly-warm foam pillow with a gel top that no longer has any cooling properties. The cool side you've been flipping to is not there tonight, because both sides are now the same temperature.</p>
+              <p>The weight was also a genuine problem I hadn't anticipated. Gel adds mass. This particular pillow was heavier than any pillow I'd owned before. Picking it up to flip at 3am felt like picking up a bag of wet sand. It's a small thing in isolation. At 3am when you're half asleep and trying to do something that should take three seconds, it's annoying enough to fully wake you up. Then you're lying awake thinking about how much you paid for a heavy pillow that doesn't cool you anymore.</p>
+              <span class="verdict">Verdict: Cooling lasts 15 minutes. Both sides end up warm. Too heavy to flip without waking up.</span>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">04</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Buckwheat Pillow</div>
+            <div class="list-item-body">
+              <p>A friend recommended buckwheat. They described it as the natural, breathable, adjustable option that serious sleep people use. They were enthusiastic enough that I ordered one the same night. It arrived in a heavy, dense bag and immediately seemed like a serious object. I put it on my bed feeling vaguely optimistic.</p>
+              <p>Buckwheat hulls are the hard outer casings of buckwheat seeds. They're natural, they're breathable, and they can be shaped by pushing the fill around. These are all accurate descriptions. What my friend failed to mention, or possibly hadn't noticed because they're a different kind of sleeper than I am, is that buckwheat hulls are audibly, unmistakably crunchy. Every time you move. Every time you shift. Every time you adjust position, roll over, or lift your head even slightly. A sound that in a quiet bedroom is entirely audible not just to you but to anyone else in the room with you.</p>
+              <p>I lasted two nights. My partner lasted one night and then moved to the couch, which is a strong signal. The pillow was returned before the end of the week. I have no doubt that buckwheat works well for some people. Specifically, people who fall asleep in one position, stay in it all night, and either sleep alone or share a bed with someone who cannot hear the buckwheat. I am not this person.</p>
+              <span class="verdict">Verdict: Audibly crunchy with every movement. Not viable for light sleepers or anyone sharing a bed.</span>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">05</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Ergonomic Contour Pillow</div>
+            <div class="list-item-body">
+              <p>After the buckwheat experience I went in a more clinical direction. I found a pillow described as ergonomic, with contoured zones for different sleep positions: a raised edge for side sleepers, a lower center for back sleepers, a cutout for shoulder position. The idea was right. Different positions genuinely do need different loft levels. The pillow was acknowledging this and attempting to solve for it in a single product.</p>
+              <p>The execution assumes that you sleep in exactly the right location relative to the pillow's contours. This assumption is incorrect for almost every person who actually sleeps in multiple positions. The pillow has a specific zone for side sleeping. That zone is in a specific location on the pillow. When I move during the night, which is constantly, I'm not moving my head to the side-sleeping zone. I'm moving to wherever feels right, which is not necessarily in the right zone. I spent three weeks waking up with my head in the wrong section of the pillow, neck at the wrong angle, wondering why the ergonomic pillow that was supposed to fix my neck stiffness was producing more neck stiffness than the pillows that weren't trying to be ergonomic.</p>
+              <p>The pillow was designed for how people are supposed to sleep according to the engineer who designed it. It was not designed for how people actually sleep, which is messily, in multiple positions, without awareness of where their head is relative to zones on a pillow. I sold it after three weeks and felt no particular attachment to it.</p>
+              <span class="verdict">Verdict: Right idea. Requires sleeping in exactly the right position relative to the contour zones. Nobody does this.</span>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">06</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The Expensive Department Store Pillow</div>
+            <div class="list-item-body">
+              <p>At this point I had spent enough money on bad pillows to justify spending significantly more money on what I assumed would be a good one. I went to a department store, found the premium bedding section, and bought the most expensive pillow they had that wasn't in a locked case. It felt excellent in the store. The fill was soft. The shell felt high quality. The brand name on the label was one I associated with quality bedding. I brought it home feeling like I'd finally spent enough to get the right result.</p>
+              <p>The pillow was fine. It was genuinely fine. It felt good to sleep on. But over the following weeks, I started to understand what I'd actually purchased. The fill was a standard polyester blend. The shell was decent cotton. These were not bad materials. But they were not significantly better than what I'd been buying at a fraction of the price. The difference I'd paid for was the brand, the store, and the supply chain between the factory and the shelf. Distributor margins. Warehousing. Retail floor space in an expensive department store. Sales commissions. The markup that gets added at every step between manufacture and purchase. None of that was in the pillow. It was in the price tag.</p>
+              <p>The pillow lasted about as long as the less expensive polyester pillows I'd owned before. It started to lose its loft at around the nine-month mark. By the one-year mark, it was in the same state as every other pillow I'd owned: flat enough to need replacing. I had paid a premium price for an average timeline.</p>
+              <span class="verdict">Verdict: Good pillow. Average lifespan. High price with no structural advantage over cheaper options.</span>
+            </div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-badge">07</div>
+          <div class="list-item-content">
+            <div class="list-item-title">The FluffCo Down Feather Pillow</div>
+            <div class="list-item-body">
+              <p>I came to this pillow skeptical in a way that six previous failures earns you. I had developed a reasonably empirical approach to assessing pillow claims by this point, which meant I was reading the product description looking for the things I'd been burned by before. Single fill, fixed shape, no temperature management, synthetic materials that would compress within months. The Down Feather Pillow description was different in ways I could actually evaluate. Pillow-in-pillow construction with an inner feather core and an outer down layer. Three-dimensional natural clusters. OEKO-TEX Certified Canadian duck down. 300-thread-count cotton shell with double-needle piped edges. These weren't vague comfort claims. These were structural descriptions I could compare against what I already knew about why pillows fail.</p>
+              <p>The difference was immediate and not subtle. The pillow-in-pillow construction does what the description says it does. The outer layer is soft in a way I'd only felt in hotel rooms. The inner core keeps the loft up through the night without collapsing. When I moved position during the night, the fill redistributed rather than holding a fixed shape. When I woke up overheated, which I expected to, I didn't, because the down was managing the temperature passively in a way that the gel coating and the cooling marketing of every previous pillow had failed to do. I stopped flipping to the cool side. I stopped waking up to adjust the pillow. The morning stiffness that had been consistent for years started to clear within the first two weeks.</p>
+              <p>I've been sleeping on the same pillow for six months. It looks and feels the same as the first night. A quick shake in the morning restores the full volume. The pillow protector keeps the shell clean. I have not once thought about replacing it. That's the thing I keep coming back to. Six months of not thinking about replacing my pillow, after years of replacing pillows every six to twelve months. That's not a small change. That's the whole problem, finally solved.</p>
+              <span class="verdict">Verdict: The one I stopped replacing.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-block">
+        <div class="cta-label">Stop replacing pillows</div>
+        <div class="cta-headline">Over 5,000 five-star reviews. 30 nights to make up your own mind.</div>
+        <div class="cta-sub">OEKO-TEX Certified Canadian duck down. Pillow-in-pillow construction. 300TC cotton shell. Firm or Soft. Free returns. 30-night sleep guarantee.</div>
+        <div class="cta-action">See why people stopped replacing their pillow →</div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Angle</div>
+        <div class="sidebar-card-body">Purchase regret and discovery. First-person narrative that mirrors the reader's own pillow history. Recognition of each failure type builds trust before the product appears.</div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Cold Traffic Fit</div>
+        <div class="sidebar-card-body"><span class="fit-badge fit-high">High</span><div style="margin-top:8px;">Most cold buyers have tried at least 2 to 3 of these types. Recognition drives scroll depth and trust before any product mention.</div></div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Pillow Types</div>
+        <div class="sidebar-list">
+          <div class="sidebar-list-item"><span>→</span> Basic polyester fill</div>
+          <div class="sidebar-list-item"><span>→</span> Memory foam block</div>
+          <div class="sidebar-list-item"><span>→</span> Cooling gel pillow</div>
+          <div class="sidebar-list-item"><span>→</span> Buckwheat pillow</div>
+          <div class="sidebar-list-item"><span>→</span> Ergonomic contour</div>
+          <div class="sidebar-list-item"><span>→</span> Department store premium</div>
+          <div class="sidebar-list-item"><span>→</span> FluffCo Down Feather</div>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Down Alternative Risk</div>
+        <div class="sidebar-card-body"><span class="fit-badge fit-none">None</span><div style="margin-top:8px;">No FluffCo products in the negative list. Down Alternative never referenced anywhere in the article.</div></div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Tone Note</div>
+        <div class="sidebar-card-body">First-person editorial voice. Can run as customer story or brand editorial depending on production direction.</div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<footer class="site-footer">
+  <span class="footer-logo">Skyvane</span>
+  <p>FluffCo Down Feather — Creative Concepts. Internal review only. Not for distribution.</p>
+</footer>
+
+</body>
+</html>
